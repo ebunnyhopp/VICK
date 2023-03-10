@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp3/htdocs/project/.env</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/login.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/layout.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/routes/web.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/mailactivation.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/mail.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/item.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/app/Mail/ActivationMail.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/register.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/forgotpass.blade.php</file>
+        </group>
+    </open-files>
+</project-private>
