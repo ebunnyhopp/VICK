@@ -8,6 +8,8 @@
             <file>file:/C:/xampp3/htdocs/project/public/index.php</file>
             <file>file:/C:/xampp3/htdocs/project/app/Http/Controllers/HomeController.php</file>
             <file>file:/C:/xampp3/htdocs/project/routes/web.php</file>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/mail.blade.php</file>
+            <file>file:/C:/xampp3/htdocs/project/app/Providers/AppServiceProvider.php</file>
         </group>
     </open-files>
 </project-private>
