@@ -317,4 +317,16 @@ class HomeController extends Controller
     public function forgotpass(){
         return view ('forgotpass');
     }
+    
+    public function changerole(Request $request){
+        $user = User::findorfail($request->user_id);
+        $user->role = $request->role_id;
+        
+        if($user->save()){
+            return [
+                'status' => 'success',
+                'message' => 'The user role has been change.'
+            ];
+        }
+    }
 }

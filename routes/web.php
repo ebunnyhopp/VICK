@@ -50,6 +50,7 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('admin/checkuser',[\App\Http\Controllers\HomeController::class,'checkuser']);
     Route::get('user/{id}/delete',[\App\Http\Controllers\HomeController::class,'deleteuser']);
     Route::post('user/resetpassword',[\App\Http\Controllers\HomeController::class,'resetpassword']);
+    Route::post('admin/changerole',[\App\Http\Controllers\HomeController::class,'changerole']);
 
 });
 

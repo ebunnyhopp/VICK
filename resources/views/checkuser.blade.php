@@ -37,7 +37,12 @@
                 <tr>
                     <td>{{$c->name}}</td>
                     <td>{{$c->email}}</td>
-                    <td class="text-center">{!!$c->getrole()!!}</td>
+                    <td class="text-center">
+                        <select class="form-control" onchange="changerole({{$c->id}},this.value)">
+                            <option value="1" {{$c->role==1 ? 'selected' : null}}>user</option>
+                            <option value="3" {{$c->role==3 ? 'selected' : null}}>admin</option>
+                        </select>
+                    </td>
                     <td class="text-center">{!!$c->getstatus()!!}</td>
                     <td class="text-center">
                         <a href="{{url('user/'.$c->id.'/delete')}}" class="btn btn-danger">
@@ -96,6 +101,43 @@ function resetpass(id){
         }
     })
 }
+
+function changerole(id, role){
+    Swal.fire({
+        title: 'Loading...',
+        html: 'Please wait for a moment...',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading()
+        }
+    })
+
+    $.ajax({
+        url:"{{url('admin/changerole')}}",
+        type:'POST',
+        data:{
+          '_token': "{{csrf_token()}}",
+          'user_id': id,
+          'role_id': role
+        },
+    }).done((response) => {
+        if(response.status == 'success'){
+            Swal.fire(
+                'Success!',
+                response.message,
+                response.status
+            )    
+        } else {
+            Swal.fire(
+                'Error!',
+                response.message,
+                response.status
+            )
+        }
+    })
+}
+
 </script>
 @endsection
 
