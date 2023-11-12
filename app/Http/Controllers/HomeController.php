@@ -84,7 +84,7 @@ class HomeController extends Controller
     
     public function item(){
         $item=Item::where('flag',1)->get();
-        return view('item', compact('item'));
+        //return view('item', compact('item'));
     }
     
     public function userrequest(){
