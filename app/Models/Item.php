@@ -21,8 +21,10 @@ class Item extends Model
     public function getstatus(){
         switch($this->status){
             case 1:
-                if($this->r_request->status ==1){
+                if($this->r_request && $this->r_request->status ==1){
                     return "<span class='badge bg-primary'>new request</span>";
+                } else if ($this->r_request && $this->r_request->status ==2){
+                    return "<span class='badge bg-primary'>pending return</span>";
                 }
                 return "<span class='badge bg-primary'>new item</span>";
                 break;

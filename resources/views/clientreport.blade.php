@@ -39,7 +39,7 @@
                     <th>Color</th>
                     <th>Serial Number</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    
                 </tr>
                 @foreach ($item as $r)
                 <tr>
@@ -51,14 +51,7 @@
                     <td>{{$r->color}}</td>
                     <td>{{$r->serial_num}}</td>
                     <td class="text-center">{!!$r->getstatus()!!}</td>
-                    <td class="text-center">
-                        <a href="{{url('admin/item/'.$r->id.'/delete')}}" class='btn btn-danger'>
-                        <i class="fas fa-trash"></i>
-                        </a>
-                        <a href="{{url('admin/item/'.$r->id.'/return')}}" class='btn btn-success'>
-                        <i class="fas fa-check"></i>
-                        </a>
-                    </td>   
+                       
                 </tr>
                 @endforeach
             </table>
