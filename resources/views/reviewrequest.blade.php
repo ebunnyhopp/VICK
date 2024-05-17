@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Item Request</h1>
+            <h1>Item Claim</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Item Request</li>
+              <li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
+              <li class="breadcrumb-item active">Item Claim</li>
             </ol>
           </div>
         </div>
@@ -22,7 +22,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Item Request</h3>
+          <h3 class="card-title">Item Claim</h3>
         </div>
         <div class="card-body">
             <form class='row'  method='post'>

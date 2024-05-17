@@ -34,6 +34,59 @@
           </div>
         </div>
         <div class="card-body">
+            <table class='table table-bordered'>
+                <tr style="background-color:#F2F3F4">
+                    <th colspan="4" class='text-center'>List of Categories</th>
+                </tr>
+                <tr>
+                    <th>Categories</th>
+                    <th>Subcategories</th>
+                    <th>Label</th>
+                    <th>Time Span</th>
+                </tr>
+                <tr>
+                    <td rowspan="7">Common Items</td>
+                    <td>Bags</td>
+                    <td>BG</td>
+                    <td rowspan="7">1 Month</td>
+                </tr>
+                <tr>
+                    <td>Clothings</td>
+                    <td>CL</td>
+                </tr>
+                <tr>
+                    <td>Containers / Bottles</td>
+                    <td>CB</td>
+                </tr>
+                <tr>
+                    <td>Electronics, Computers, Phones</td>
+                    <td>ES</td>
+                </tr>
+                <tr>
+                    <td>Stationary</td>
+                    <td>ST</td>
+                </tr>
+                <tr>
+                    <td>Accessories, Watches, Glasses</td>
+                    <td>AS</td>
+                </tr>
+                <tr>
+                    <td>Books</td>
+                    <td>BK</td>
+                </tr>
+                <tr>
+                    <td>Protected Items</td>
+                    <td>ID Card, Student/Staff Card, Security Card, Bank Card</td>
+                    <td>CD</td>
+                    <td>1 Week</td>
+                </tr>
+                <tr>
+                    <td>Valuable Items</td>
+                    <td>Valuable Stuff, Money, Jewelry</td>
+                    <td>JV</td>
+                    <td>1 Week</td>
+                </tr>
+            </table>
         </div>
         <!-- /.card-body -->
         <!-- /.card-footer-->

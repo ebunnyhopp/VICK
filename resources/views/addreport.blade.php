@@ -4,11 +4,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Category</h1>
+            <h1>Add Report</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="clientdashboard">Home</a></li>
               <li class="breadcrumb-item active">Add Report</li>
             </ol>
           </div>
@@ -41,7 +41,11 @@
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Location</label>
-                    <input class="form-control" name="location"/>
+                    <select class="form-control" name="location">
+                        @foreach($location as $l)
+                        <option value="{{ $l->id }}">{{ $l->location }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Date</label>

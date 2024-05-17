@@ -26,11 +26,11 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('logout',[\App\Http\Controllers\HomeController::class,'logout']);
     Route::get('dashboard',[\App\Http\Controllers\HomeController::class,'clientdashboard']);
     Route::get('admin/dashboard',[\App\Http\Controllers\HomeController::class,'admindashboard']);
+    Route::get('profile',[\App\Http\Controllers\HomeController::class,'profile']);
     Route::get('admin/setting/category',[\App\Http\Controllers\HomeController::class,'category']);
     Route::get('admin/item',[\App\Http\Controllers\HomeController::class,'item']);
     Route::get('admin/request',[\App\Http\Controllers\HomeController::class,'userrequest']);
     Route::get('admin/setting/category/add',[\App\Http\Controllers\HomeController::class,'addcategory']);
-    Route::post('admin/setting/category/add',[\App\Http\Controllers\HomeController::class,'storecategory']);
     Route::get('admin/setting/category/{id}/delete',[\App\Http\Controllers\HomeController::class,'deletecategory']);
     Route::get('admin/item/add',[\App\Http\Controllers\HomeController::class,'additem']);
     Route::post('admin/item/add',[\App\Http\Controllers\HomeController::class,'storeitem']);
@@ -51,7 +51,19 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('user/{id}/delete',[\App\Http\Controllers\HomeController::class,'deleteuser']);
     Route::post('user/resetpassword',[\App\Http\Controllers\HomeController::class,'resetpassword']);
     Route::post('admin/changerole',[\App\Http\Controllers\HomeController::class,'changerole']);
+    Route::get('admin/setting/location',[\App\Http\Controllers\HomeController::class,'location']);
+    Route::get('admin/setting/location/{id}/delete',[\App\Http\Controllers\HomeController::class,'deletelocation']);
 
+    Route::group(['prefix' => 'ajax'],function(){
+        Route::post('modal-category',[\App\Http\Controllers\HomeController::class,'modalCategory']);
+        Route::post('store-category',[\App\Http\Controllers\HomeController::class,'storeCategory']);
+        Route::post('modal-location',[\App\Http\Controllers\HomeController::class,'modalLocation']);
+        Route::post('store-location',[\App\Http\Controllers\HomeController::class,'storeLocation']);
+        Route::post('modal-profile',[\App\Http\Controllers\HomeController::class,'modalProfile']);
+        Route::post('store-profile',[\App\Http\Controllers\HomeController::class,'storeProfile']);
+
+        
+    });
 });
 
 

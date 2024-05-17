@@ -8,10 +8,11 @@ use App\Models\Item;
 use App\Models\Request as Req;
 use Hash;
 use App\Models\User;
+use App\Models\UserDetail;
 use App\Models\UserToken;
 use Mail;
 use App\Mail\ActivationMail;
-
+use App\Models\LLocation;
 class HomeController extends Controller
 {
     public function home() {
@@ -95,11 +96,14 @@ class HomeController extends Controller
         return view('addcategory');
     }
     
-    public function storecategory(Request $request){
-        $category=new LCategory;
+    public function storeCategory(Request $request){
+        $category = isset($request->id) ? LCategory::findorfail($request->id) : new LCategory;
         $category->category=$request->category;
         if($category->save()){
-            return redirect('admin/setting/category');
+            return [
+                'status' => 'success',
+                'message' => 'Category has been saved'
+            ];
         }         
     }
     
@@ -112,20 +116,23 @@ class HomeController extends Controller
     }
     
     public function additem(){
-        $category= LCategory::where('flag',1)->get();
-        return view('additem', compact('category')); 
+        $location = LLocation::where('flag',1)->get();
+        $category = LCategory::where('flag',1)->get();
+        $admins = User::whereIn('role', [2,3])->get();
+        return view('additem', compact('category','location', 'admins')); 
     }
     
     public function storeitem(Request $request){
         $item=new Item;
         $item->item=$request->itemname;
         $item->category_id=$request->category;
-        $item->place_found=$request->location;
+        $item->location_id=$request->location;
         $item->date_found=date('Y-m-d', strtotime($request->date));
         $item->description=$request->description;
         $item->color=$request->color;
         $item->serial_num=$request->serialnum;
         $item->user_id=Auth::user()->id;
+        $item->receiver_id=$request->receiver_id;
 
         if($item->save()){
             return redirect('admin/item');
@@ -154,15 +161,16 @@ class HomeController extends Controller
     }
     
     public function addreport(){
+        $location = LLocation::where('flag',1)->get();
         $category=LCategory::where('flag',1)->get();
-        return view('addreport', compact('category'));
+        return view('addreport', compact('category','location'));
     }
     
     public function storereport(Request $request){
         $item=new Item;
         $item->item=$request->itemname;
         $item->category_id=$request->category;
-        $item->place_found=$request->location;
+        $item->location_id=$request->location;
         $item->date_found=date('Y-m-d', strtotime($request->date));
         $item->description=$request->description;
         $item->color=$request->color;
@@ -255,6 +263,7 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password_confirm);
+        $user->email_verfied_at = date('Y-m-d H:i:s');
         
         if($user->save()){
             $token= new UserToken;
@@ -262,7 +271,7 @@ class HomeController extends Controller
             $token->token=md5(uniqid());
             
             if ($token->save()){
-                Mail::to($user)->send(new ActivationMail($token));
+//                Mail::to($user)->send(new ActivationMail($token));
                 return [
                 'status' => 'success',
                 'message' => 'The user has been registered succesfully. Please check your email for verification link'
@@ -328,5 +337,75 @@ class HomeController extends Controller
                 'message' => 'The user role has been change.'
             ];
         }
+    }
+    
+    public function modalCategory(Request $request){
+        $category = isset($request->id) ? LCategory::findorfail($request->id) : new LCategory;
+        return view('modals.modal-category', compact('category'));
+    }
+    
+    public function location(){
+        $location= LLocation::where('flag',1)->get();
+        return view('location', compact('location'));
+    }
+    
+    public function storeLocation(Request $request){
+        $location = isset($request->id) ? LLocation::findorfail($request->id) : new LLocation;
+        $location->location=$request->location;
+        if($location->save()){
+            return [
+                'status' => 'success',
+                'message' => 'Location has been saved'
+            ];
+        } 
+    }
+    
+    public function modalLocation(Request $request){
+        $location = isset($request->id) ? LLocation::findorfail($request->id) : new LLocation;
+        return view('modals.modal-location', compact('location'));
+    }
+    
+    public function deletelocation($id){
+        $location=LLocation::find($id);
+        $location->flag=0;
+        if($location->save()){
+            return redirect('admin/setting/location');
+        }
+    }
+    
+    public function modalProfile(Request $request){
+        $user = User::findorfail($request->id);
+        return view('modals.modal-profile', compact('user'));
+    }
+    
+    public function storeProfile(Request $request){
+        $user = User::findorfail(auth()->user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($user->save()){
+            $details = UserDetail::where('user_id', auth()->user()->id)->first() ?? new UserDetail;
+            $details->address = $request->address;
+            $details->tel_num = $request->tel_num;
+            $details->user_id = $user->id;
+            
+            if($details->save()){
+                return [
+                    'status' => 'success',
+                    'message' => 'Profile has been saved'
+                ];
+            }
+        } 
+    }
+    
+    public function profile(){
+        return view ('profile');
+    }
+    
+    public function addprofile(){
+        return view('addprofile');
+    }
+    
+    public function deleteprofile(){
+        return view('deleteprofile');
     }
 }

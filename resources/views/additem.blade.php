@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
               <li class="breadcrumb-item active">Add Item</li>
             </ol>
           </div>
@@ -29,7 +29,7 @@
                 @csrf
                 <div class="col-md-6 mt-3">
                     <label>Item Name</label>
-                    <input class="form-control" name="itemname" />
+                    <input class="form-control" name="itemname"/>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Category</label>
@@ -40,10 +40,6 @@
                     </select>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label>Location</label>
-                    <input class="form-control" name="location"/>
-                </div>
-                <div class="col-md-6 mt-3">
                     <label>Date</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="date"/>
@@ -51,6 +47,22 @@
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label>Location</label>
+                    <select class="form-control" name="location">
+                        @foreach($location as $l)
+                        <option value="{{ $l->id }}">{{ $l->location }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label>Receiver Name</label>
+                    <select class="form-control" name="receiver_id">
+                        @foreach($admins as $a)
+                        <option value="{{ $a->id }}">{{ $a->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Description</label>

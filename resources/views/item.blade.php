@@ -1,5 +1,8 @@
 @extends('layout')
 @section('content')
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -8,7 +11,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
               <li class="breadcrumb-item active">Item</li>
             </ol>
           </div>
@@ -29,7 +32,8 @@
           </div>
         </div>
         <div class="card-body">
-          <table class='table table-bordered'>
+          <table id="itemList" class='table table-bordered'>
+              <thead>
                 <tr style="background-color:#F2F3F4">
                     <th>Item name</th>
                     <th>Category</th>
@@ -41,11 +45,13 @@
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
+              </thead>
+              <tbody>
                 @foreach ($item as $c)
                 <tr>
                     <td>{{$c->item}}</td>
                     <td>{{$c->r_category->category}}</td>
-                    <td>{{$c->place_found}}</td>
+                    <td>{{$c->r_location->location}}</td>
                     <td>{{$c->date_found}}</td>
                     <td>{{$c->description}}</td>
                     <td>{{$c->color}}</td>
@@ -61,7 +67,7 @@
                     </td>
                 </tr>
                 @endforeach
-        
+              </tbody>
             </table>
         </div>
         <!-- /.card-body -->
@@ -69,7 +75,16 @@
       <!-- /.card -->
 
     </section>
+@endsection
 
+@section('postscript')
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script>
+    dt = $("#itemList").DataTable()
+</script>
 @endsection
 
 

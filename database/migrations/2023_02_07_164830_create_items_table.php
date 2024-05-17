@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('item');
             $table->foreignId('user_id');
             $table->foreignId('category_id');
-            $table->string('place_found');
+            $table->foreignId('location_id');
             $table->date('date_found');
             $table->string('description');
             $table->string('color');
+            $table->foreignId('receiver_id');
             $table->string('serial_num')->nullable();
             $table->integer('status')->default(1);
             $table->integer('flag')->default(1);
@@ -29,6 +30,8 @@ return new class extends Migration
             
             $table->foreign('category_id')->references('id')->on('l_categories');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('location_id')->references('id')->on('l_locations');
+            $table->foreign('receiver_id')->references('id')->on('users');
         });
     }
 

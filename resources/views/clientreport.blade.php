@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="clientdashboard">Home</a></li>
               <li class="breadcrumb-item active">Item</li>
             </ol>
           </div>
@@ -45,7 +45,7 @@
                 <tr>
                     <td>{{$r->item}}</td>
                     <td>{{$r->r_category->category}}</td>
-                    <td>{{$r->place_found}}</td>
+                    <td>{{$r->r_location->location}}</td>
                     <td>{{$r->date_found}}</td>
                     <td>{{$r->description}}</td>
                     <td>{{$r->color}}</td>

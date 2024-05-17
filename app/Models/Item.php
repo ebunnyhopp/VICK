@@ -15,7 +15,10 @@ class Item extends Model
     
     public function r_request() {
         return $this->hasOne(Request::class, 'item_id');
-        
+    }
+    
+    public function r_location(){
+        return $this->belongsTo(LLocation::class,'location_id');
     }
     
     public function getstatus(){

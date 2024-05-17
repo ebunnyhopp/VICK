@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Category</h1>
+            <h1>Location</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item active">Location</li>
             </ol>
           </div>
         </div>
@@ -22,28 +22,28 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Category List</h3>
+          <h3 class="card-title">Location List</h3>
 
           <div class="card-tools">
-            <a href='javascript:void(0)' class="btn btn-sm btn-primary" onclick="modalCategory()">
-            Add Category
+            <a href='javascript:void(0)' class="btn btn-sm btn-primary" onclick="modalLocation()">
+            Add Location
             </a>
           </div>
         </div>
         <div class="card-body">
             <table class='table table-bordered'>
                 <tr style="background-color:#F2F3F4">
-                    <th width="80%">Category</th>
+                    <th width="80%">Location</th>
                     <th width="20%">Action</th>
                 </tr>
-                @foreach($category as $c)
+                @foreach($location as $l)
                 <tr>
-                    <td>{{$c->category}}</td>
+                    <td>{{$l->location}}</td>
                     <td class='text-center'>
-                        <a href="javascript:void(0)" onclick="modalCategory({{$c->id}})" class='btn btn-primary'>
+                        <a href="javascript:void(0)" onclick="modalLocation({{$l->id}})" class='btn btn-primary'>
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="{{url('admin/setting/category/'.$c->id.'/delete')}}" class='btn btn-danger'>
+                        <a href="{{url('admin/setting/location/'.$l->id.'/delete')}}" class='btn btn-danger'>
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -60,17 +60,17 @@
     </section>
     
     <script>
-        modalCategory = (id) => {
+        modalLocation = (id) => {
             $.ajax({
                 type: "POST",
-                url: "{{ url('ajax/modal-category') }}",
+                url: "{{ url('ajax/modal-location') }}",
                 data: {
                     '_token': '{{csrf_token() }}',
                     'id': id
                 }
             }).done((response) => {
                 $("#variable").html(response)
-                $("#modal-category").modal('show')
+                $("#modal-location").modal('show')
             });
         }
     </script>

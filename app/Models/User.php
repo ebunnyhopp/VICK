@@ -60,4 +60,7 @@ class User extends Authenticatable
         return isset($this->email_verified_at) ?  "<span class='badge bg-success'>Active</span>" : "<span class='badge bg-warning'>Inactive</span>";
     }
     
+    public function r_details(){
+        return $this->hasOne(UserDetail::class,'user_id');
+    }
 }
