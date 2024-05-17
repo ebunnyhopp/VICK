@@ -263,7 +263,7 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password_confirm);
-        $user->email_verfied_at = date('Y-m-d H:i:s');
+        $user->email_verfied_at = date('Y-m-d H:i:s'); // Uncomment this to activate email.
         
         if($user->save()){
             $token= new UserToken;
