@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp3/htdocs/project/resources/views/modals/modal-category.blade.php</file>
             <file>file:/C:/xampp3/htdocs/project/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp3/htdocs/project/routes/console.php</file>
             <file>file:/C:/xampp3/htdocs/project/routes/web.php</file>
             <file>file:/C:/xampp3/htdocs/project/resources/views/layout.blade.php</file>
-            <file>file:/C:/xampp3/htdocs/project/resources/views/location.blade.php</file>
-            <file>file:/C:/xampp3/htdocs/project/resources/views/category.blade.php</file>
-            <file>file:/C:/xampp3/htdocs/project/resources/views/additem.blade.php</file>
             <file>file:/C:/xampp3/htdocs/project/resources/views/profile.blade.php</file>
         </group>
     </open-files>
