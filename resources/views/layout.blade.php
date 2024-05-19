@@ -101,7 +101,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             
-            @if (Auth::user()->role==3)
+            @if(in_array(Auth::user()->role, [3,2]))
             <li class="nav-item">
             <a href="{{url('admin/dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
@@ -123,7 +123,7 @@
             </li>
             @endif
             
-            @if(Auth::user()->role==3)
+            @if(in_array(Auth::user()->role, [3,2]))
           <li class="nav-item">
             <a href="{{url('admin/setting/category')}}" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
@@ -151,7 +151,7 @@
             </a>
           </li>
             @endif
-            @if(Auth::user()->role==3)
+            @if(in_array(Auth::user()->role, [3,2]))
           <li class="nav-item">
             <a href="{{url('admin/request')}}" class="nav-link">
               <i class="nav-icon fas fa-envelope-open-text"></i>

@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="admindashboard">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
               <li class="breadcrumb-item active">User Management</li>
             </ol>
           </div>
@@ -39,8 +39,9 @@
                     <td>{{$c->email}}</td>
                     <td class="text-center">
                         <select class="form-control" onchange="changerole({{$c->id}},this.value)">
-                            <option value="1" {{$c->role==1 ? 'selected' : null}}>user</option>
-                            <option value="3" {{$c->role==3 ? 'selected' : null}}>admin</option>
+                            <option value="1" {{$c->role==1 ? 'selected' : null}}>User</option>
+                            <option value="1" {{$c->role==2 ? 'selected' : null}}>Staff</option>
+                            <option value="3" {{$c->role==3 ? 'selected' : null}}>Admin</option>
                         </select>
                     </td>
                     <td class="text-center">{!!$c->getstatus()!!}</td>

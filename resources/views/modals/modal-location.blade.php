@@ -1,22 +1,22 @@
-<div class="modal fade" id="modal-category">
+<div class="modal fade" id="modal-location">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Category</h4>
+                <h4 class="modal-title">Location</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="categoryData">
+                <form id="locationData">
                     @csrf
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Add / Update Category</label>
-                            <input type="text" class="form-control" name="category" value="{{ $category->category }}">
+                            <label>Add / Update Location</label>
+                            <input type="text" class="form-control" name="location" value="{{ $location->location }}">
                         </div>
                     </div>
-                    <input type="hidden" name="id" value="{{ $category->id }}">
+                    <input type="hidden" name="id" value="{{ $location->id }}">
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
@@ -30,9 +30,9 @@
 <script>
     function submit(){
         var validateGroup = $(".needs-validation");
-        var formData = new FormData($('#categoryData')[0]);
+        var formData = new FormData($('#locationData')[0]);
         
-        if($('#categoryData')[0].checkValidity() === true){
+        if($('#locationData')[0].checkValidity() === true){
             Swal.fire({
                 title: 'Saving...',
                 html: 'Please wait for a moment...',
@@ -44,7 +44,7 @@
             })
             
             $.ajax({
-                url:"{{url('ajax/store-category')}}",
+                url:"{{url('ajax/store-location')}}",
                 type:'POST',
                 data: formData,
                 cache: false,

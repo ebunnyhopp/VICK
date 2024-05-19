@@ -8,7 +8,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">Profile</li>
+
+                <li class="breadcrumb-item active">Profile</li>
             </ol>
           </div>
         </div>
@@ -31,8 +32,8 @@
                         <input class="form-control" value="{{ auth()->user()->name }}" name="name" required/>
                     </div>
                     <div class="col-md-6 mt-3">
-                        <label>Email Address</label>
-                        <input class="form-control" value="{{ auth()->user()->email }}" name="email"/>
+                        <label>Email Address<span class="text-danger">*</span></label>
+                        <input class="form-control" value="{{ auth()->user()->email }}" name="email" required/>
                     </div>
                     <div class="col-md-6 mt-3">
                         <label>Telephone Num</label>

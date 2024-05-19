@@ -47,8 +47,11 @@ class User extends Authenticatable
             case 1:
                 return "<span class='badge bg-primary'>User</span>";
                 break;
+            case 2;
+                return "<span class='badge bg-primary'>Staff</span>";
+                break;
             case 3:
-                return "<span class='badge bg-success'>Admin/Staff</span>";
+                return "<span class='badge bg-success'>Admin</span>";
                 break;
             default:
                 return 'error';
