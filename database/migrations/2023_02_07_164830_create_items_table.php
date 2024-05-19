@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('location_id');
             $table->date('date_found');
             $table->string('description');
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->foreignId('receiver_id');
             $table->string('serial_num')->nullable();
             $table->integer('status')->default(1);
