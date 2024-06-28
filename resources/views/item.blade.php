@@ -37,11 +37,10 @@
                 <tr style="background-color:#F2F3F4">
                     <th>Item name</th>
                     <th>Category</th>
-                    <th>Location</th>
                     <th>Date</th>
+                    <th>Location</th>
+                    <th>Receiver Name</th>
                     <th>Description</th>
-                    <th>Color</th>
-                    <th>Serial Number</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -51,22 +50,25 @@
                 <tr>
                     <td>{{$c->item}}</td>
                     <td>{{$c->r_category->category}}</td>
-                    <td>{{$c->r_location->location}}</td>
                     <td>{{$c->date_found}}</td>
+                    <td>{{$c->r_location->location}}</td>
+                    <td>{{$c->r_receiver->name}}</td>
                     <td>{{$c->description}}</td>
-                    <td>{{$c->color}}</td>
-                    <td>{{$c->serial_num}}</td>
                     <td class="text-center">{!!$c->getstatus()!!}</td>
                     <td class="text-center">
+                        <a href="{{url('admin/item/'.$c->id.'/view')}}" class='btn btn-primary'>
+                        <!--<i class="fas fa-check"></i>-->View
+                        </a>
                         <a href="{{url('admin/item/'.$c->id.'/delete')}}" class='btn btn-danger'>
-                        <i class="fas fa-trash"></i>
+                        <!--<i class="fas fa-trash">Delete</i>-->Delete
                         </a>
                         <a href="{{url('admin/item/'.$c->id.'/return')}}" class='btn btn-success'>
-                        <i class="fas fa-check"></i>
+                        <!--<i class="fas fa-check">Return</i>-->Return
                         </a>
                     </td>
                 </tr>
                 @endforeach
+<!--                eloquent-->
               </tbody>
             </table>
         </div>
@@ -83,7 +85,7 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script>
-    dt = $("#itemList").DataTable()
+    dt = $("#itemList").DataTable();
 </script>
 @endsection
 

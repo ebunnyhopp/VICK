@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('color')->nullable();
             $table->foreignId('receiver_id');
+            $table->string('attachment')->nullable();
             $table->string('serial_num')->nullable();
             $table->integer('status')->default(1);
             $table->integer('flag')->default(1);

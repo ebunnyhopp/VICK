@@ -39,11 +39,11 @@
                     <td>{!!$c->getstatus()!!}</td>
                     <td class="text-center">
                         <a href="{{url('request/'.$c->id.'/reviewrequest')}}" class='btn btn-primary'>
-                        <i class="fas fa-eye"></i>
+                        <!--<i class="fas fa-eye">-->View</i>
                         </a>
                         @if($c->status==2)
                         <a href="{{url('request/'.$c->id.'/reviewrequest')}}?action=return" class='btn btn-success'>
-                        <i class="fas fa-check"></i>
+                        <!--<i class="fas fa-check">-->Return Item</i>
                         </a>
                         @endif
                     </td>

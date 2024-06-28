@@ -9,7 +9,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Add Item</li>
+              <li class="breadcrumb-item active">View Item</li>
             </ol>
           </div>
         </div>
@@ -25,24 +25,25 @@
           <h3 class="card-title">Add Item</h3>
         </div>
         <div class="card-body">
-            <form class='row' action='{{url('admin/item/add')}}' method='post' enctype="multipart/form-data">
+            <form action='{{url('admin/item/add')}}' class='row' method='POST' >
                 @csrf
+                
                 <div class="col-md-6 mt-3">
                     <label>Item Name<span class="text-danger">*</span></label>
-                    <input class="form-control" name="itemname" required/>
+                    <input class="form-control" name="itemname" value="{{$item->item}}"/>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Category<span class="text-danger">*</span></label>
-                    <select class="form-control" name="category" required>
+                    <select class="form-control" name="category">
                         @foreach($category as $c)
-                        <option value="{{ $c->id }}">{{ $c->category }}</option>
+                        <option value="{{ $c->id }}" {{$item->category_id ==$c->id ? 'selected' : NULL}}>{{ $c->category }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label>Date<span class="text-danger">*</span></label>
+                    <label>Date</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="date"/>
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="date" value="{{date('d/m/Y',strtotime($item->date_found))}}"/>
                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -52,7 +53,7 @@
                     <label>Location<span class="text-danger">*</span></label>
                     <select class="form-control" name="location">
                         @foreach($location as $l)
-                        <option value="{{ $l->id }}">{{ $l->location }}</option>
+                        <option value="{{ $l->id }}" {{$item->location_id ==$l->id ? 'selected' : NULL}}>{{ $l->location }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -60,29 +61,36 @@
                     <label>Receiver Name<span class="text-danger">*</span></label>
                     <select class="form-control" name="receiver_id">
                         @foreach($admins as $a)
-                        <option value="{{ $a->id }}">{{ $a->name }}</option>
+                        <option value="{{ $a->id }}" {{$item->receiver_id ==$a->id ? 'selected' : NULL}}>{{ $a->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Description<span class="text-danger">*</span></label>
-                    <input class="form-control" name="description"/>
+                    <input class="form-control" name="description" value="{{$item->description}}"/>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Color</label>
-                    <input class="form-control" name="color"/>
+                    <input class="form-control" name="color" value="{{$item->color}}"/>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Serial Number</label>
-                    <input class="form-control" name="serialnum"/>
+                    <input class="form-control" name="serial_num" value="{{$item->serial_num}}"/>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label>Attachment<!--<span class="text-danger">*</span>--></label>
-                    <input class="form-control" name="attachment" type="file"/>
+                    <label>Attachment</label>
+                    @if($item->attachment)
+                    <a href="{{url('uploads/'.$item->attachment)}}" class="badge bg-primary">View Attachment</a>
+                    @else
+                    <a href="#" class="badge bg-dark">No Attachment</a>
+                    @endif
                 </div>
+                <input type='hidden' name='id' value='{{$item->id}}'>
                 <div class="col-md-12 text-center mt-3" >
-                    <button class="btn btn-success" type="submit">Submit</button>
+                    <a href="{{url('admin/item')}}" class="btn btn-primary">Back</a>
+                    <button type="submit" onClick="submit()" class="btn btn-success">Save</button>
                 </div>
+
             </form>
         </div>
         <!-- /.card-body --> 
@@ -90,7 +98,8 @@
       <!-- /.card -->
     </section>
 @endsection
-
+<!--@section('postscript')
+@endsection-->
 @section('postscript')    
 <script>
     $(() => {

@@ -9,7 +9,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
 
-                <li class="breadcrumb-item active">Profile</li>
+                <!--<li class="breadcrumb-item active">Profile</li>-->
             </ol>
           </div>
         </div>
@@ -21,9 +21,9 @@
 
       <!-- Default box -->
       <div class="card">
-        <div class="card-header">
+<!--        <div class="card-header">
           <h3 class="card-title">Profile</h3>
-        </div>
+        </div>-->
           <div class="card-body">
                 <form id="profileData" class="row">
                     @csrf
@@ -36,16 +36,21 @@
                         <input class="form-control" value="{{ auth()->user()->email }}" name="email" required/>
                     </div>
                     <div class="col-md-6 mt-3">
-                        <label>Telephone Num</label>
+                        <label>Student ID / Staff ID<span class="text-danger">*</span></label>
+                        <input class="form-control" value="{{ auth()->user()->r_details->idnum ?? NULL }}" name="idnum"/>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <label>Telephone Num<span class="text-danger">*</span></label>
                         <input class="form-control" value="{{ auth()->user()->r_details->tel_num ?? NULL }}" name="tel_num"/>
                     </div>
                     <div class="col-md-6 mt-3">
-                        <label>Address</label>
+                        <label>Address<span class="text-danger">*</span></label>
                         <textarea class="form-control" name="address">{{ auth()->user()->r_details->address ?? NULL }}</textarea>
                     </div>
                 </form>
+              <br>
               <div class="col-md-12">
-                  <button onClick="submit()" class="btn btn-primary">Save</button>
+                    <button onClick="submit()" class="btn btn-primary">Save</button>
               </div>
             </div>
         </div>

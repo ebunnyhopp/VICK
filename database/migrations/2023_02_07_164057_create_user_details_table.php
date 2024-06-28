@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('idnum');
             $table->string('address');
             $table->string('tel_num');
             $table->timestamps();

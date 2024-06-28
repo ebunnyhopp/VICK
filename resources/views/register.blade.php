@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-8">
                     <div class="icheck-primary">
-                        <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                        <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
                         <label for="agreeTerms">I agree to the <a href="#">terms</a></label>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <button type="button" onclick="submit()" class="btn btn-primary btn-block">Register</button>
                 </div>
             </div>
-            <a href="login.html" class="text-center">I already have a membership</a>
+            <a href="{{url('login')}}" class="text-center">I already have an account</a>
         </div>
     </div>
 </div>

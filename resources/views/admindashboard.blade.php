@@ -7,10 +7,9 @@
             <h1>Dashboard</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <!--<ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
+            </ol>-->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -18,19 +17,54 @@
 
     <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
+        <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Dashboard</h3>
+          <!--<h3 class="card-title">Dashboard</h3>-->
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
             </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+            <!--<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
               <i class="fas fa-times"></i>
+            </button>-->
+          </div>
+        </div>
+        <div class="card-body">
+            <table class='table table-bordered'>
+                <tr style="background-color:#F2F3F4">
+                    <th colspan="4" class='text-center'>Reporting</th>
+                </tr>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                </tr>
+                <tr>
+                    <td>Item Reported</td>
+                    <td>{{$items->count()}}</td>
+                </tr>
+                <tr>
+                    <td>Item Claimed</td>
+                    <td>{{$req->count()}}</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <!--<h3 class="card-title">Dashboard</h3>-->
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
             </button>
+            <!--<button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>-->
           </div>
         </div>
         <div class="card-body">
@@ -91,7 +125,7 @@
         <!-- /.card-body -->
         <!-- /.card-footer-->
       </div>
-      <!-- /.card -->
+      
 
     </section>
 

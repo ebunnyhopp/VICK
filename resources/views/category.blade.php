@@ -41,10 +41,10 @@
                     <td>{{$c->category}}</td>
                     <td class='text-center'>
                         <a href="javascript:void(0)" onclick="modalCategory({{$c->id}})" class='btn btn-primary'>
-                            <i class="fas fa-edit"></i>
+                            <!--<i class="fas fa-edit"></i>-->Edit
                         </a>
                         <a href="{{url('admin/setting/category/'.$c->id.'/delete')}}" class='btn btn-danger'>
-                            <i class="fas fa-trash"></i>
+                            <!--<i class="fas fa-trash"></i>-->Delete
                         </a>
                     </td>
                 </tr>

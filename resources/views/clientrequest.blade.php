@@ -29,13 +29,21 @@
                     <th>Item name</th>
                     <th>Description</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
                 @foreach ($req as $c)
                 <tr>
                     <td>{{$c->r_item->item}}</td>
                     <td>{{$c->description}}</td>
                     <td>{!!$c->getstatus()!!}</td>
-                    
+                    <td class="text-center">
+                        <a href="{{url('request/'.$c->id.'/viewrequest')}}" class='btn btn-primary'>
+                        <!--<i class="fas fa-check"></i>-->View
+                        </a>
+                        <a href="{{url('request/'.$c->id.'/deleterequest')}}" class='btn btn-danger'>
+                        <!--<i class="fas fa-trash">Delete</i>-->Delete
+                        </a>
+                    </td>
                 </tr>
                 @endforeach
         

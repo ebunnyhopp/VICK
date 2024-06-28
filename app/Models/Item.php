@@ -13,6 +13,10 @@ class Item extends Model
         return $this->belongsTo(LCategory::class,'category_id');
     }
     
+    public function r_receiver(){
+        return $this->belongsTo(User::class,'receiver_id');
+    }
+   
     public function r_request() {
         return $this->hasOne(Request::class, 'item_id');
     }

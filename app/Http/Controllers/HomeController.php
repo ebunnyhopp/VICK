@@ -74,7 +74,9 @@ class HomeController extends Controller
     }
     
     public function admindashboard(){
-        return view('admindashboard');
+        $items=Item::where('flag',1)->get();
+        $req=Req::where('flag',1)->where('status',2)->get();
+        return view('admindashboard', compact('items','req'));
     }
     
     public function category(){
@@ -92,16 +94,29 @@ class HomeController extends Controller
         return view('userrequest');
     }
     
-    public function addcategory(){
-        return view('addcategory');
-    }
+//    public function addcategory(){
+//        return view('addcategory');
+//    }
     
     public function storeCategory(Request $request){
-        $category = isset($request->id) ? LCategory::findorfail($request->id) : new LCategory;
-        $category->category=$request->category;
+        $category=LCategory::where('category',strtoupper($request->category))->first();
+        if($category){
+            if($category->flag == 1){
+                return [
+                    'status' => 'error',
+                    'message' => 'Category already exist'
+                ];
+            } else {
+                $category->flag = 1;
+            }  
+        } else {
+            $category = isset($request->id) ? LCategory::findorfail($request->id) : new LCategory;
+            $category->category=$request->category;
+        }
+        
         if($category->save()){
             return [
-                'status' => 'success',
+               'status' => 'success',
                 'message' => 'Category has been saved'
             ];
         }         
@@ -123,7 +138,27 @@ class HomeController extends Controller
     }
     
     public function storeitem(Request $request){
-        $item=new Item;
+        $item= isset($request->id) ? Item::findorfail($request->id) : new Item;
+        if(isset($request->attachment)){
+            if(in_array($request->attachment->extension(), ['png','jpg','jpeg','bmp','pdf'])){
+                if($request->attachment->getSize()<3000000){
+                    $attachment = uniqid().'.'.$request->attachment->extension();
+                    $request->attachment->move(public_path('uploads'), $attachment);
+                } else {
+                    return [
+                        'status' => 'error',
+                        'message' => 'Maximum file size is 3MB.'
+                    ];
+                }
+            } else {
+                return [
+                    'status' => 'error',
+                    'message' => 'Only image files are allowed.'
+                ];
+            }
+        } else{
+            $attachment = $item->attachment;
+        }
         $item->item=$request->itemname;
         $item->category_id=$request->category;
         $item->location_id=$request->location;
@@ -133,11 +168,24 @@ class HomeController extends Controller
         $item->serial_num=$request->serialnum;
         $item->user_id=Auth::user()->id;
         $item->receiver_id=$request->receiver_id;
-
+        $item->attachment = $attachment;
         if($item->save()){
             return redirect('admin/item');
         }
     }
+    
+    public function reviewitem($id){
+        $item= Item::find($id);
+        $location = LLocation::where('flag',1)->get();
+        $category=LCategory::where('flag',1)->get();
+        $admins = User::whereIn('role', [2,3])->get();
+        return view('reviewitem', compact('item','location','category','admins'));
+    }
+    
+    public function reviewlostitem($id){
+        $item= Item::find($id);
+        return view('reviewlostitem', compact('item'));
+    } 
     
     public function deleteitem($id){
         $item=Item::find($id);
@@ -163,11 +211,32 @@ class HomeController extends Controller
     public function addreport(){
         $location = LLocation::where('flag',1)->get();
         $category=LCategory::where('flag',1)->get();
-        return view('addreport', compact('category','location'));
+        $admins = User::whereIn('role', [2,3])->get();
+        return view('addreport', compact('category','location', 'admins'));
     }
     
     public function storereport(Request $request){
-        $item=new Item;
+        $item= isset($request->id) ? Item::findorfail($request->id) : new Item;
+        if(isset($request->attachment)){
+            if(in_array($request->attachment->extension(), ['png','jpg','jpeg','bmp','pdf'])){
+                if($request->attachment->getSize()<3000000){
+                    $attachment = uniqid().'.'.$request->attachment->extension();
+                    $request->attachment->move(public_path('uploads'), $attachment);
+                } else {
+                    return [
+                        'status' => 'error',
+                        'message' => 'Maximum file size is 3MB.'
+                    ];
+                }
+            } else {
+                return [
+                    'status' => 'error',
+                    'message' => 'Only image files are allowed.'
+                ];
+            }
+        } else{
+            $attachment = $item->attachment;
+        }
         $item->item=$request->itemname;
         $item->category_id=$request->category;
         $item->location_id=$request->location;
@@ -176,16 +245,38 @@ class HomeController extends Controller
         $item->color=$request->color;
         $item->serial_num=$request->serialnum;
         $item->user_id=Auth::user()->id;
-
+        $item->receiver_id=$request->receiver_id;
+        $item->attachment=$attachment;
         if($item->save()){
             return redirect('clientreport');
         }
+    }
+    
+    public function reviewreport($id){
+        $item= Item::find($id);
+        $location = LLocation::where('flag',1)->get();
+        $category=LCategory::where('flag',1)->get();
+        $admins = User::whereIn('role', [2,3])->get();
+        return view('reviewreport', compact('item', 'category' , 'location' , 'admins'));
+    }
+    
+    public function deletereport($id){
+        $item=Item::find($id);
+        $item->flag=0;
+        if($item->save()){
+            return redirect('clientreport');
+        } 
     }
     
     public function lostitem(){
         $item=Item::where('flag',1)->where('status',1)->where('user_id','!=',Auth::user()->id)->whereNotIn('id',Req::where('user_id',Auth::user()->id)->pluck('item_id'))->get();
         return view ('lostitem', compact('item'));
     }
+    
+//    public function reviewlostitem($id){
+//        $id= Item::find($id);
+//        return view('reviewlostitem', compact('item'));
+//    }
     
     public function adminrequest(){
         $req=Req::where('flag',1)->whereNotIn('item_id',Item::where('status',2)->pluck('id'))->get();
@@ -197,29 +288,40 @@ class HomeController extends Controller
         return view('clientrequest', compact('req'));
     }
     
-    public function addclientrequest(){
-        return view ('addclientrequest');
-    }
-    
+//    public function addclientrequest(){
+//        return view ('addclientrequest');
+//    }
+
     public function requestitem($id){
         $item=Item::find($id);
         return view('requestitem', compact('item'));
     }
     
     public function storerequest(Request $request, $id){
-        $req=new Req;
+        $req=new Req();
         $req->user_id=Auth::user()->id;
         $req->item_id=$id;
         $req->description=$request->description;
-
-        
+            if($req->save()){
+                return redirect('clientrequest');
+            }
+    }
+    
+    public function viewrequest($id){
+        $req=Req::find($id);
+        return view('clientviewrequest', compact('req'));
+    }
+    
+    public function deleterequest($id){
+        $req=Req::find($id);
+        $req->flag=0;
         if($req->save()){
             return redirect('clientrequest');
-        }
+        } 
     }
     
     public function reviewrequest($id){
-    $req= Req::find($id);
+    $req=Req::find($id);
     if(isset($_GET['action'])){
         if($_GET['action']=='approve'){
             $req->status=2;
@@ -263,7 +365,7 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password_confirm);
-        $user->email_verfied_at = date('Y-m-d H:i:s'); // Uncomment this to activate email.
+        $user->email_verified_at = date('Y-m-d H:i:s'); // Uncomment this to activate email.
         
         if($user->save()){
             $token= new UserToken;
@@ -274,7 +376,7 @@ class HomeController extends Controller
 //                Mail::to($user)->send(new ActivationMail($token));
                 return [
                 'status' => 'success',
-                'message' => 'The user has been registered succesfully. Please check your email for verification link'
+                'message' => 'The user has been registered succesfully.'
             ];    
             }
         }
@@ -334,7 +436,7 @@ class HomeController extends Controller
         if($user->save()){
             return [
                 'status' => 'success',
-                'message' => 'The user role has been change.'
+                'message' => 'The user role has been changed.'
             ];
         }
     }
@@ -350,8 +452,21 @@ class HomeController extends Controller
     }
     
     public function storeLocation(Request $request){
-        $location = isset($request->id) ? LLocation::findorfail($request->id) : new LLocation;
-        $location->location=$request->location;
+        $location=LLocation::where('location',strtoupper($request->location))->first();
+        if($location){
+            if($location->flag == 1){
+                return [
+                    'status' => 'error',
+                    'message' => 'Location is already exist'
+                ];
+            } else {
+                $location->flag = 1;
+            }  
+        } else {
+            $location = isset($request->id) ? Llocation::findorfail($request->id) : new LLocation;
+            $location->location=$request->location;
+        }
+        
         if($location->save()){
             return [
                 'status' => 'success',
@@ -373,17 +488,18 @@ class HomeController extends Controller
         }
     }
     
-    public function modalProfile(Request $request){
-        $user = User::findorfail($request->id);
-        return view('modals.modal-profile', compact('user'));
-    }
-    
+//    public function modalProfile(Request $request){
+//        $user = User::findorfail($request->id);
+//        return view('modals.modal-profile', compact('user'));
+//    }
+
     public function storeProfile(Request $request){
         $user = User::findorfail(auth()->user()->id);
         $user->name = $request->name;
         $user->email = $request->email;
         if($user->save()){
             $details = UserDetail::where('user_id', auth()->user()->id)->first() ?? new UserDetail;
+            $details->idnum = $request->idnum;
             $details->address = $request->address;
             $details->tel_num = $request->tel_num;
             $details->user_id = $user->id;

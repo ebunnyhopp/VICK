@@ -41,10 +41,10 @@
                     <td>{{$l->location}}</td>
                     <td class='text-center'>
                         <a href="javascript:void(0)" onclick="modalLocation({{$l->id}})" class='btn btn-primary'>
-                            <i class="fas fa-edit"></i>
+                            <!--<i class="fas fa-edit">-->Edit</i>
                         </a>
                         <a href="{{url('admin/setting/location/'.$l->id.'/delete')}}" class='btn btn-danger'>
-                            <i class="fas fa-trash"></i>
+                            <!--<i class="fas fa-trash">-->Delete</i>
                         </a>
                     </td>
                 </tr>

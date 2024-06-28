@@ -36,10 +36,6 @@
                     <input class="form-control" name="category" value="{{$item->r_category->category}}" readOnly></input>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <label>Location</label>
-                    <input class="form-control" name="location" value="{{$item->place_found}}" readOnly/>
-                </div>
-                <div class="col-md-6 mt-3">
                     <label>Date</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="date" value="{{date('d/m/Y',strtotime($item->date_found))}})" readOnly/>
@@ -48,7 +44,15 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="col-md-6 mt-3">
+                    <label>Location</label>
+                    <input class="form-control" name="location" value="{{$item->r_location->location}}" readOnly/>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label>Receiver Name<span class="text-danger">*</span></label>
+                    <input class="form-control" name="receiver_id" value="{{$item->r_receiver->name}}" readOnly/>
+
+                </div>
                 <div class="col-md-6 mt-3">
                     <label>Color</label>
                     <input class="form-control" name="color" value="{{$item->color}}" readOnly/>
@@ -62,7 +66,10 @@
                     <label>Description</label>
                     <textarea class="form-control" rows="4" name="description"></textarea>
                 </div>
-                <div class="col-md-12 text-center mt-3" ><button class="btn btn-success" type="submit">Submit</button></div>
+                <div class="col-md-12 text-center mt-3" >
+                    <a href="{{url('lostitem')}}" class="btn btn-primary">Back</a>
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
             </form>
         </div>
         <!-- /.card-body --> 

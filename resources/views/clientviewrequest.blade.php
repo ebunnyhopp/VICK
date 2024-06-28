@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Item Claim</h1>
+            <h1>Item Request</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Item Claim</li>
+              <li class="breadcrumb-item"><a href="{{url('dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item active">Item Request</li>
             </ol>
           </div>
         </div>
@@ -22,14 +22,14 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Item Claim</h3>
+          <h3 class="card-title">Add Request</h3>
         </div>
         <div class="card-body">
-            <form class='row'  method='post'>
+            <form class='row' action='{{url('request/'.$req->id.'/viewrequest')}}' method='POST'>
                 @csrf
                 <div class="col-md-6 mt-3">
                     <label>Item Name</label>
-                    <input class="form-control" name="itemname" value="{{$req->r_item->item}}" readOnly/>
+                    <input class="form-control" name="itemname" value="{{$req->r_item->item}}" readOnly />
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Category</label>
@@ -37,12 +37,12 @@
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Location</label>
-                    <input class="form-control" name="location" value="{{$req->r_item->place_found}}" readOnly/>
+                    <input class="form-control" name="location" value="{{$req->r_item->r_location->location}}" readOnly/>
                 </div>
                 <div class="col-md-6 mt-3">
                     <label>Date</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="date" value="{{date('d/m/Y',strtotime($req->r_item->date_found))}})" readOnly/>
+                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" name="date" value="{{date('d/m/Y',strtotime($req->r_item->date_found))}}" readOnly/>
                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
@@ -60,18 +60,13 @@
                 </div>
                 <div class="col-md-12 mt-3">
                     <label>Description</label>
-                    <textarea class="form-control" rows="4" name="description" readOnly>{{$req->description}}</textarea>
+                    <textarea class="form-control" rows="4" name="description">{{$req->description}}</textarea>
                 </div>
                 <div class="col-md-12 text-center mt-3" >
-                        <a href="{{url('request/'.$req->id.'/reviewrequest')}}?action=approve" class='btn btn-success'>
-                            Approve
-                        </a>
-                        <a href="{{url('request/'.$req->id.'/reviewrequest')}}?action=reject" class='btn btn-danger'>
-                            Reject
-                        </a>
-                        <a href="{{url('admin/request')}}?action=reject" class='btn btn-primary'>
-                            Back
-                        </a>
+                    <a href="{{url('clientrequest')}}" class='btn btn-primary'>
+                        Back    
+                    </a>
+                    <button type="submit" onClick="submit()" class="btn btn-success">Save</button>
                 </div>
             </form>
         </div>
@@ -84,3 +79,12 @@
 @section('postscript')    
 
 @endsection
+
+
+
+
+
+
+
+
+

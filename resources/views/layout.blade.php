@@ -141,6 +141,7 @@
             </a>
           </li>
             @endif
+            
             @if(in_array(Auth::user()->role, [3,2]))
           <li class="nav-item">
             <a href="{{url('admin/item')}}" class="nav-link">
@@ -151,6 +152,7 @@
             </a>
           </li>
             @endif
+            
             @if(in_array(Auth::user()->role, [3,2]))
           <li class="nav-item">
             <a href="{{url('admin/request')}}" class="nav-link">

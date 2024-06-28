@@ -40,17 +40,17 @@
                     <td class="text-center">
                         <select class="form-control" onchange="changerole({{$c->id}},this.value)">
                             <option value="1" {{$c->role==1 ? 'selected' : null}}>User</option>
-                            <option value="1" {{$c->role==2 ? 'selected' : null}}>Staff</option>
+                            <option value="2" {{$c->role==2 ? 'selected' : null}}>Staff</option>
                             <option value="3" {{$c->role==3 ? 'selected' : null}}>Admin</option>
                         </select>
                     </td>
                     <td class="text-center">{!!$c->getstatus()!!}</td>
                     <td class="text-center">
                         <a href="{{url('user/'.$c->id.'/delete')}}" class="btn btn-danger">
-                            <i class="fas fa-trash"></i>
+                            <!--<i class="fas fa-trash">-->Delete</i>
                         </a>
                         <button onClick='resetpass({{$c->id}})' class="btn btn-info">
-                            <i class="fas fa-key"></i>
+                            <!--<i class="fas fa-key">-->Reset Password</i>
                         </button>
                         
                     </td>
